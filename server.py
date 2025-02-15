@@ -16,16 +16,16 @@ def sent_analyzer():
         function. The output returned shows the label and its confidence 
         score for the provided text.
     '''
-    textToAnalyze = request.args["textToAnalyze"]
-    #print(f"INNA text: {textToAnalyze}")
-    res = sentiment_analyzer(textToAnalyze)
+    text_to_analyze = request.args["textToAnalyze"]
+    #print(f"INNA text: {text_to_analyze}")
+    res = sentiment_analyzer(text_to_analyze)
     #print(f"Inna Res: {res}")
     score = res["score"]
     if not score:
         return "Invalid input ! Try again."
     sentiment = res["label"].split('_')[1]
     return f"The given text has been identified as {sentiment} with a score of {score}"
-    
+
 
 @app.route("/")
 def render_index_page():
@@ -33,9 +33,8 @@ def render_index_page():
         page over the Flask channel
     '''
     return render_template("index.html")
-   
+
 
 if __name__ == "__main__":
-    ''' This functions executes the flask app and deploys it on localhost:5000
-    '''
+    # This functions executes the flask app and deploys it on localhost:5000
     app.run(host="0.0.0.0", port=5000)
