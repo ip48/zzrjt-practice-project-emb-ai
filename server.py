@@ -17,7 +17,9 @@ def sent_analyzer():
         score for the provided text.
     '''
     textToAnalyze = request.args["textToAnalyze"]
-    res = sentiment_analysis(textToAnalyze)
+    #print(f"INNA text: {textToAnalyze}")
+    res = sentiment_analyzer(textToAnalyze)
+    #print(f"Inna Res: {res}")
     score = res["score"]
     sentiment = res["label"].split('_')[1]
     return f"The given text has been identified as {sentiment} with a score of {score}"
@@ -34,4 +36,4 @@ def render_index_page():
 if __name__ == "__main__":
     ''' This functions executes the flask app and deploys it on localhost:5000
     '''
-    app.run(debug = True)
+    app.run(host="0.0.0.0", port=5002)
